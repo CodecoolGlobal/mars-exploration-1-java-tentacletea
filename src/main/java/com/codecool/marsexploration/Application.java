@@ -4,21 +4,27 @@ import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.MapConfig;
 import com.codecool.marsexploration.data.MapSize;
 
-import java.util.Random;
+import java.util.*;
 
 public class Application {
     public static void main(String[] args) {
-        Random random = new Random();
-        System.out.println(random.nextInt(42));
+        String outputPath = "src/main/resources/exploration.map";
+        int mapWidth = 50;
 
-        MapConfig map = new MapConfig(fileName, mapWidth, terrainSymbols, resourceSymbols, coordinates);
+        List<Integer> mountains = new ArrayList<>();
+        List<Integer> pits = new ArrayList<>();
+        mountains.add(10);
+        mountains.add(20);
+        mountains.add(30);
+        pits.add(5);
+        pits.add(15);
 
-        AreaGenerator areaGenerator = new AreaGenerator(MapSize.LARGE.getSize());
+        int water = 2;
+        int minerals = 5;
 
-        ResourcePlacement placement = new ResourucePlacement();
+        MapConfig mapConfig = new MapConfig(outputPath, mapWidth, mountains, pits, water, minerals);
 
-        MapGenerator mapGenerator = new MapGenerator();
-        mapGenerator.init();
-
+        MapGenerater mapGenerater = new MapGenerator(mapConfig);
+        mapGenerater.generate();
     }
 }
