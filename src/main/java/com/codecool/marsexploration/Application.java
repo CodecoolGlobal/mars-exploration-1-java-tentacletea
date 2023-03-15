@@ -53,10 +53,12 @@ public class Application {
 
 
 //        printMap.run(addedPitsToMountainMap);
-        MapReader mapReader = new MapReader(addedMountainMap);
-        Stream<String> mapLines = mapReader.read();
-        MapWriter mapWriter = new MapWriter(outputPath);
-        mapWriter.write(mapLines);
+
+        //TODO : question for el is mapLines = mapReader.read(addedMountainMap) better ?
+        MapReader mapReader = new MapReader();
+        Stream<String> mapStream = mapReader.read(addedMountainMap);
+        MapWriter mapWriter = new MapWriter();
+        mapWriter.write(mapStream, outputPath);
 
         MapGenerator mapGenerator = new MapGenerator(mapConfig);
         mapGenerator.generate();

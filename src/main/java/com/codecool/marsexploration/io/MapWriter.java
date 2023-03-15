@@ -5,13 +5,7 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 public class MapWriter {
-    private final String filePath;
-
-    public MapWriter(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public void write(Stream<String> lines) {
+    public void write(Stream<String> lines, String filePath) {
         try {
             FileWriter writer = new FileWriter(filePath);
             lines.forEach(line -> {
