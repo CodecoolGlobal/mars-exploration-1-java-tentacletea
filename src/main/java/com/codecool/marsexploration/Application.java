@@ -1,6 +1,7 @@
 package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.data.MapConfig;
+import com.codecool.marsexploration.logic.ConfigValidator;
 import com.codecool.marsexploration.logic.MapGenerator;
 
 import java.util.*;
@@ -8,7 +9,7 @@ import java.util.*;
 public class Application {
     public static void main(String[] args) {
         String outputPath = "src/main/resources/exploration.map";
-        int mapWidth = 50;
+        int mapWidth = 20;
 
         List<Integer> mountains = new ArrayList<>();
         List<Integer> pits = new ArrayList<>();
@@ -22,6 +23,8 @@ public class Application {
         int minerals = 5;
 
         MapConfig mapConfig = new MapConfig(outputPath, mapWidth, mountains, pits, water, minerals);
+        ConfigValidator configValidator = new ConfigValidator(mapConfig);
+        System.out.println("mapConfig is valid = " + configValidator.validate(25));
 
         MapGenerator mapGenerator = new MapGenerator(mapConfig);
         mapGenerator.generate();
