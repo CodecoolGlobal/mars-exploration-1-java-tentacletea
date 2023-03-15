@@ -27,12 +27,29 @@ public class ResourceManager {
 
 
     public void placeResource(){
+
+        for (Resource resource : resources){
+            int count = 0;
+            if (resource.getResource().equals("*")){
+                count = mapConfig.minerals();
+            } else {
+                count = mapConfig.water();
+            }
+            while (count > 0){
+                Coordinate coordinate = getRandomCoordinatesForResource();
+                mapWithTerreins.get(coordinate.y()).set(coordinate.x(), resource.getResource());
+                count--;
+            }
+        }
+
+
+
         //loop und alle mineralien plazieren
         //mineralien sind in mapconfig
         //
 
-        Coordinate coordinate = getRandomCoordinatesForResource();
-        mapWithTerreins.get(coordinate.y()).set(coordinate.x(), "*");
+//        Coordinate coordinate = getRandomCoordinatesForResource();
+//        mapWithTerreins.get(coordinate.y()).set(coordinate.x(), "*");
     }
 
 
