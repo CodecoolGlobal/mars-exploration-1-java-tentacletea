@@ -20,38 +20,43 @@ public class ResourceManager {
         this.resources = resources;
     }
 
+    public boolean isAdjacentToPreferredTerrain(Coordinate coordinate, String terrain){
+        int y = coordinate.y();
+        int x = coordinate.x();
+
+        if (y > 0 && mapWithTerreins.get(y - 1).get(x).equals(terrain)) { // Check North
+            return true;
+        } else if (y < mapWithTerreins.size() - 1 && mapWithTerreins.get(y + 1).get(x).equals(terrain)) { // Check South
+            return true;
+        } else if (x > 0 && mapWithTerreins.get(y).get(x - 1).equals(terrain)) { // Check West
+            return true;
+        } else if (x < mapWithTerreins.get(y).size() - 1 && mapWithTerreins.get(y).get(x + 1).equals(terrain)) { // Check East
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+    public void placeResource(){
+        resources.stream()
+                .forEach(resource -> {
+                    int count = resource.getResource().equals("*") ? mapConfig.minerals() : mapConfig.water();
+                    while (count > 0){
+                        Coordinate coordinate = getRandomCoordinatesForResource();
+                        if (isAdjacentToPreferredTerrain(coordinate, resource.getTerrainForResource())){
+                            mapWithTerreins.get(coordinate.y()).set(coordinate.x(), resource.getResource());
+                            count--;
+                        }
+                    }
+                });
+    }
+
     private int randomNumberGenerator(int min, int max){
         Random rand = new Random();
         return rand.nextInt(max - min + 1);
     }
-
-
-    public void placeResource(){
-
-        for (Resource resource : resources){
-            int count = 0;
-            if (resource.getResource().equals("*")){
-                count = mapConfig.minerals();
-            } else {
-                count = mapConfig.water();
-            }
-            while (count > 0){
-                Coordinate coordinate = getRandomCoordinatesForResource();
-                mapWithTerreins.get(coordinate.y()).set(coordinate.x(), resource.getResource());
-                count--;
-            }
-        }
-
-
-
-        //loop und alle mineralien plazieren
-        //mineralien sind in mapconfig
-        //
-
-//        Coordinate coordinate = getRandomCoordinatesForResource();
-//        mapWithTerreins.get(coordinate.y()).set(coordinate.x(), "*");
-    }
-
 
     public Coordinate getRandomCoordinatesForResource(){
         int min = 0;
