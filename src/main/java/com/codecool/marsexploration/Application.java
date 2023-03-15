@@ -24,7 +24,7 @@ public class Application {
 
         MapConfig mapConfig = new MapConfig(outputPath, mapWidth, mountains, pits, water, minerals);
 
-        MapGenerater mapGenerater = new MapGenerator(mapConfig);
-        mapGenerater.generate();
+        MapGenerator mapGenerator = new MapGenerator(mapConfig);
+        mapGenerator.generate();
     }
 }
