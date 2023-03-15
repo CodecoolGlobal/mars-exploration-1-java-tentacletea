@@ -1,6 +1,5 @@
-package com.codecool.marsexploration.ui;
+package com.codecool.marsexploration.io;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PrintMap {

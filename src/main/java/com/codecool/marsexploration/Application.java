@@ -1,19 +1,22 @@
 package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.data.MapConfig;
+import com.codecool.marsexploration.io.MapReader;
 import com.codecool.marsexploration.logic.ResourceManager;
 import com.codecool.marsexploration.logic.resource.Minerals;
 import com.codecool.marsexploration.logic.ShapeGenerator;
 import com.codecool.marsexploration.logic.ConfigValidator;
 import com.codecool.marsexploration.logic.MapGenerator;
 import com.codecool.marsexploration.logic.resource.Resource;
-import com.codecool.marsexploration.ui.PrintMap;
+import com.codecool.marsexploration.io.MapWriter;
+import com.codecool.marsexploration.io.PrintMap;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Application {
     public static void main(String[] args) {
-        String outputPath = "src/main/resources/exploration.map";
+        String outputPath = "src/main/resources/exploration-dummy.map";
         Random random = new Random();
 
         int mapWidth = 20;
@@ -49,9 +52,11 @@ public class Application {
         resourcementManager.placeResource();
 
 
-
-        printMap.run(addedPitsToMountainMap);
-
+//        printMap.run(addedPitsToMountainMap);
+        MapReader mapReader = new MapReader(addedMountainMap);
+        Stream<String> mapLines = mapReader.read();
+        MapWriter mapWriter = new MapWriter(outputPath);
+        mapWriter.write(mapLines);
 
         MapGenerator mapGenerator = new MapGenerator(mapConfig);
         mapGenerator.generate();
