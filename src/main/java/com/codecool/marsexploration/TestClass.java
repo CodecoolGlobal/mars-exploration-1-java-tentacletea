@@ -29,8 +29,8 @@ public class TestClass {
         ShapeGenerator shapegenerator = new ShapeGenerator(mapConfig.mapWidth());
 
         PrintMap printMap = new PrintMap();
-        List<List<String>> addedMountainMap=   shapegenerator.addShapesToMap(shapegenerator.getEmptyMap(),shapegenerator.getMountainShapes(),"^");
-        List<List<String>> addedPitsToMountainMap = shapegenerator.addShapesToMap(addedMountainMap,shapegenerator.getPitShapes(),"#");
+        List<List<String>> addedMountainMap=   shapegenerator.addShapesToMap(shapegenerator.getEmptyMap(),shapegenerator.getDummyMountainShapes(),"^");
+        List<List<String>> addedPitsToMountainMap = shapegenerator.addShapesToMap(addedMountainMap,shapegenerator.getDummyPitShapes(),"#");
         printMap.run(addedPitsToMountainMap);
 
         // System.out.println(shapegenerator.getOneShape(random,10));
