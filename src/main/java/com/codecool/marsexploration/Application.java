@@ -1,8 +1,7 @@
 package com.codecool.marsexploration;
 
-import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.MapConfig;
-import com.codecool.marsexploration.data.MapSize;
+import com.codecool.marsexploration.logic.MapGenerator;
 
 import java.util.*;
 
