@@ -10,6 +10,6 @@ public class MapGenerator {
     }
 
     public void generate() {
-
+    
     }
 }
