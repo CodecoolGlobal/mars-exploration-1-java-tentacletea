@@ -2,8 +2,7 @@ package com.codecool.marsexploration.logic;
 
 import com.codecool.marsexploration.data.Coordinate;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ShapeGenerator {
 
@@ -38,7 +37,35 @@ private int mapWidth;
         }
 
         return map;
- }public List<List<Coordinate>> getDummyMountainShapes(){
+ }
+    public  List<List<Coordinate>> getOneShapeSecondVersion(Random random, int shapesize){
+
+        Map<String,Coordinate > shape = new HashMap<>();
+        int x = random.nextInt(0,19);
+        int y = random.nextInt(0,19);
+        int previousX;
+        int previousY;
+        Coordinate startingPoint  = new Coordinate(x,y);
+        shape.put((x+ "" +y),startingPoint);
+        while(shape.size()< shapesize){
+
+            x = random.nextInt(x-1,x+2);
+            y= random.nextInt(y-1,y+2);
+            System.out.println("x: " + x +" y: " + y);
+            if(x< 0 || x > shapesize-1 || y < 0 || y > shapesize -1){
+                continue;
+            }
+            shape.put(x+" "+y,new Coordinate(x,y));
+        }
+        System.out.println(shape.size());
+        //shape.values().stream().collect(Collectors.toList());
+        List<List<Coordinate>> test = new ArrayList<>();
+        test.add( new ArrayList<>(shape.values()));
+        return test;
+    }
+
+
+ public List<List<Coordinate>> getDummyMountainShapes(){
         List<List<Coordinate>> mountainShapes = new ArrayList<>();
         List<Coordinate> mountainShape1 = new ArrayList<>();
         List<Coordinate> mountainShape2 = new ArrayList<>();

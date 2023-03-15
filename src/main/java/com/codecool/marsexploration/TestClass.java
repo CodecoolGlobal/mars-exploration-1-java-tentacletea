@@ -5,9 +5,8 @@ import com.codecool.marsexploration.data.MapConfig;
 import com.codecool.marsexploration.logic.ShapeGenerator;
 import com.codecool.marsexploration.ui.PrintMap;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TestClass {
     public static void main(String[] args) {
@@ -29,16 +28,34 @@ public class TestClass {
         ShapeGenerator shapegenerator = new ShapeGenerator(mapConfig.mapWidth());
 
         PrintMap printMap = new PrintMap();
-        List<List<String>> addedMountainMap=   shapegenerator.addShapesToMap(shapegenerator.getEmptyMap(),shapegenerator.getMountainShapes(),"^");
-        List<List<String>> addedPitsToMountainMap = shapegenerator.addShapesToMap(addedMountainMap,shapegenerator.getPitShapes(),"#");
-        printMap.run(addedPitsToMountainMap);
+      //  List<List<String>> addedMountainMap=   shapegenerator.addShapesToMap(shapegenerator.getEmptyMap(),shapegenerator.getDummyMountainShapes(),"^");
+      //  List<List<String>> addedPitsToMountainMap = shapegenerator.addShapesToMap(addedMountainMap,shapegenerator.getDummyPitShapes(),"#");
+       List<List<String>> testShape = shapegenerator.addShapesToMap(shapegenerator.getEmptyMap(),shapegenerator.getOneShapeSecondVersion(random,30),"*");
+        printMap.run(testShape);
+       // System.out.println(getOneShapeSecondVersion(random,10));
+    }
 
-        // System.out.println(shapegenerator.getOneShape(random,10));
+    public static List<Coordinate> getOneShapeThirdVersion(Random random, int shapesize){
+
+        Map<String,Coordinate > shape = new HashMap();
+        int x = random.nextInt(0,19);
+        int y = random.nextInt(0,19);
+        Coordinate startingPoint  = new Coordinate(x,y);
+        shape.put((x+ "" +y),startingPoint);
+        while(shape.size()< shapesize){
+            x = random.nextInt(x-1,x+2);
+            y= random.nextInt(y-1,y+2);
+            shape.put(x+" "+y,new Coordinate(x,y));
+        }
+
+
+        //shape.values().stream().collect(Collectors.toList());
+        return new ArrayList<>(shape.values());
     }
 
 
 
-    public List<Coordinate> getOneShape(Random random, int shapesize){
+    public static List<Coordinate> getOneShape(Random random, int shapesize){
         List<Coordinate> shape = new ArrayList<>();
         List<String>alreadyChosenCoordinates = new ArrayList<>();
         int x = random.nextInt(0,19);
@@ -52,18 +69,18 @@ public class TestClass {
                 alreadyChoosen = false;
                 x = random.nextInt(x-1,x+2);
                 y= random.nextInt(y-1,y+2);
+
                 for (String coordinate:alreadyChosenCoordinates) {
                     String generatedRandom =(x+""+y);
                     if(coordinate.equals(generatedRandom)){
                         alreadyChoosen=true;
                     }
                 }
-            }while((x < 0 && x > 19) && (y< 0 && y>19)&& alreadyChoosen);
+            }while((x < 0 || x > 19) && (y< 0 || y>19)&& alreadyChoosen);
 
             shape.add(new Coordinate(x,y));
             alreadyChosenCoordinates.add((x+""+y));
         }
-
         return shape;
     }
 }
