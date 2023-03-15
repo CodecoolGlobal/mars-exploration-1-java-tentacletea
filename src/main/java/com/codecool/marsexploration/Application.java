@@ -1,10 +1,13 @@
 package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.data.MapConfig;
-import com.codecool.marsexploration.data.MapSize;
+import com.codecool.marsexploration.logic.ResourceManager;
+import com.codecool.marsexploration.logic.resource.Minerals;
 import com.codecool.marsexploration.logic.ShapeGenerator;
 import com.codecool.marsexploration.logic.ConfigValidator;
 import com.codecool.marsexploration.logic.MapGenerator;
+import com.codecool.marsexploration.logic.resource.Resource;
+import com.codecool.marsexploration.ui.PrintMap;
 
 import java.util.*;
 
@@ -30,6 +33,25 @@ public class Application {
         
         ConfigValidator configValidator = new ConfigValidator(mapConfig);
         System.out.println("mapConfig is valid = " + configValidator.validate(25));
+
+
+        ShapeGenerator shapegenerator = new ShapeGenerator(mapConfig.mapWidth());
+
+        PrintMap printMap = new PrintMap();
+        List<List<String>> addedMountainMap=   shapegenerator.addShapesToMap(shapegenerator.getEmptyMap(),shapegenerator.getDummyMountainShapes(),"^");
+        List<List<String>> addedPitsToMountainMap = shapegenerator.addShapesToMap(addedMountainMap,shapegenerator.getDummyPitShapes(),"#");
+
+
+        Set<Resource> resources = new HashSet<>();
+        Minerals minerals1 = new Minerals();
+        resources.add(minerals1);
+        ResourceManager resourcementManager = new ResourceManager(addedPitsToMountainMap, mapConfig, resources);
+        resourcementManager.placeResource();
+
+
+
+        printMap.run(addedPitsToMountainMap);
+
 
         MapGenerator mapGenerator = new MapGenerator(mapConfig);
         mapGenerator.generate();
