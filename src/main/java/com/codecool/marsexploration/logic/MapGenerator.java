@@ -1,4 +1,4 @@
-package com.codecool.marsexploration;
+package com.codecool.marsexploration.logic;
 
 import com.codecool.marsexploration.data.MapConfig;
 
