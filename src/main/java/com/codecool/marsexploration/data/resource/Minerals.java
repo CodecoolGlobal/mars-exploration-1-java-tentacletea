@@ -1,10 +1,4 @@
-package com.codecool.marsexploration.logic.resource;
-
-import com.codecool.marsexploration.data.Coordinate;
-import com.codecool.marsexploration.data.MapConfig;
-
-import java.util.List;
-import java.util.Random;
+package com.codecool.marsexploration.data.resource;
 
 public class Minerals  implements Resource {
 

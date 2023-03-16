@@ -4,14 +4,14 @@ import com.codecool.marsexploration.data.MapConfig;
 import com.codecool.marsexploration.logic.AreaGenerator;
 import com.codecool.marsexploration.io.MapReader;
 import com.codecool.marsexploration.logic.ResourceManager;
-import com.codecool.marsexploration.logic.resource.Minerals;
+import com.codecool.marsexploration.data.resource.Minerals;
 import com.codecool.marsexploration.logic.ShapeGenerator;
 import com.codecool.marsexploration.logic.ConfigValidator;
 import com.codecool.marsexploration.logic.MapGenerator;
-import com.codecool.marsexploration.logic.resource.Resource;
+import com.codecool.marsexploration.data.resource.Resource;
 import com.codecool.marsexploration.io.MapWriter;
 import com.codecool.marsexploration.io.PrintMap;
-import com.codecool.marsexploration.logic.resource.Water;
+import com.codecool.marsexploration.data.resource.Water;
 
 import java.util.*;
 import java.util.stream.Stream;
