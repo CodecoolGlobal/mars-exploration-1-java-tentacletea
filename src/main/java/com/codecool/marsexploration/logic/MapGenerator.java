@@ -77,4 +77,5 @@ public class MapGenerator {
         }
         return map;
     }
+
 }

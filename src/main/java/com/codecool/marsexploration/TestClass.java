@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 public class TestClass {
     public static void main(String[] args) {
 Random random = new Random();
+
+
+
         String outputPath = "src/main/resources/exploration.map";
         int mapWidth = 25;
         List<Integer> mountains = new ArrayList<>();
