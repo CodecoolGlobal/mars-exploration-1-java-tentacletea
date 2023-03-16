@@ -21,7 +21,6 @@ public class AreaGenerator {
         areas.add(area3);
         areas.add(area4);
         areas.add(area5);
-
       return  areas;
     }
     public List<Area> getAreasForMediumMap(){
