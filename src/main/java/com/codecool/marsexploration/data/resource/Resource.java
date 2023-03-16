@@ -1,4 +1,4 @@
-package com.codecool.marsexploration.logic.resource;
+package com.codecool.marsexploration.data.resource;
 
 public interface Resource {
     String getResource();
