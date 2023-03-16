@@ -54,7 +54,7 @@ public class Application {
 
 //        printMap.run(addedPitsToMountainMap);
 
-        //TODO : question for el is mapLines = mapReader.read(addedMountainMap) better ?
+        //TODO : question for el is mapStream = mapReader.read(addedMountainMap) better ?
         MapReader mapReader = new MapReader();
         Stream<String> mapStream = mapReader.read(addedMountainMap);
         MapWriter mapWriter = new MapWriter();

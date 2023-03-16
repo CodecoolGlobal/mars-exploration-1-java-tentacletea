@@ -14,6 +14,7 @@ public class MapWriter {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+
             });
             writer.close();
         } catch (IOException e) {
