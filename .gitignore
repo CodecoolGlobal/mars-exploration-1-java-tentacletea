@@ -1,4 +1,5 @@
 # Default ignored files
+src/main/resources/Terra-formers.map
 /shelf/
 /.idea
 # Editor-based HTTP Client requests
