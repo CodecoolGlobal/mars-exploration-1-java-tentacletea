@@ -18,7 +18,7 @@ public class MapGenerator {
         this.mapConfig = mapConfig;
     }
 
-    public void generate() {
+    public List<List<String>> generate() {
 
         List<List<Coordinate>> mountainAreas = new ArrayList<>();
         List<List<Coordinate>> pitAreas = new ArrayList<>();
@@ -34,8 +34,7 @@ public class MapGenerator {
         addShapesToMap(stringMap,pitAreas,"#");
 
         PrintMap printMap = new PrintMap();
-        printMap.run(stringMap);
-    
+        return stringMap;
     }
     public List<List<Coordinate>> getShapesForOneResource(List<Coordinate> shapes){
         AreaGenerator areaGenerator = new AreaGenerator();

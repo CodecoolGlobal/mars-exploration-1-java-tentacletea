@@ -37,31 +37,27 @@ public class Application {
         MapConfig mapConfig = new MapConfig(outputPath, mapWidth, mountains, pits, water, minerals);
         
         ConfigValidator configValidator = new ConfigValidator(mapConfig);
-        System.out.println("mapConfig is valid = " + configValidator.validate(25));
-
+        System.out.println("MapConfig is valid = " + configValidator.validate(25));
 
         ShapeGenerator shapeGenerator = new ShapeGenerator(random);
         AreaGenerator areaGenerator = new AreaGenerator();
         MapGenerator mapGenerator = new MapGenerator(mapConfig,areaGenerator,shapeGenerator);
-
+        List<List<String>> map = mapGenerator.generate();
 
         Set<Resource> resources = new HashSet<>();
         Minerals minerals1 = new Minerals();
         resources.add(minerals1);
         Water water1 = new Water();
         resources.add(water1);
-        ResourceManager resourceManager = new ResourceManager(addedPitsToMountainMap, mapConfig, resources);
+        ResourceManager resourceManager = new ResourceManager(map, mapConfig, resources);
         resourceManager.placeResource();
-
-//        printMap.run(addedPitsToMountainMap);
 
         //TODO : question for el is mapStream = mapReader.read(addedMountainMap) better ?
         MapReader mapReader = new MapReader();
-        Stream<String> mapStream = mapReader.read(addedMountainMap);
+        Stream<String> mapStream = mapReader.read(map);
         MapWriter mapWriter = new MapWriter();
         mapWriter.write(mapStream, outputPath);
-
-
-        mapGenerator.generate();
+        PrintMap printMap = new PrintMap();
+        printMap.run(map);
     }
 }

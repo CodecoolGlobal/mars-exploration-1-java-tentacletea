@@ -15,7 +15,7 @@ public class Minerals  implements Resource {
 
     @Override
     public String getTerrainForResource() {
-        return "^";
+        return "▲";
     }
 
 }
