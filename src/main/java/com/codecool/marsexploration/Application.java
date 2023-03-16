@@ -1,6 +1,7 @@
 package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.data.MapConfig;
+import com.codecool.marsexploration.data.MapSize;
 import com.codecool.marsexploration.logic.AreaGenerator;
 import com.codecool.marsexploration.io.MapReader;
 import com.codecool.marsexploration.logic.ResourceManager;
@@ -21,7 +22,7 @@ public class Application {
         String outputPath = "src/main/resources/Terra-formers.map";
         Random random = new Random();
 
-        int mapWidth = 25;
+        int mapWidth = MapSize.SMALL.getSize();
         
         List<Integer> mountains = new ArrayList<>();
         List<Integer> pits = new ArrayList<>();
@@ -52,7 +53,6 @@ public class Application {
         ResourceManager resourceManager = new ResourceManager(map, mapConfig, resources);
         resourceManager.placeResource();
 
-        //TODO : question for el is mapStream = mapReader.read(map) than new MapReader(map) better ?
         MapReader mapReader = new MapReader();
         Stream<String> mapStream = mapReader.read(map);
         MapWriter mapWriter = new MapWriter();
