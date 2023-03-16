@@ -52,7 +52,6 @@ public class Application {
         ResourceManager resourceManager = new ResourceManager(map, mapConfig, resources);
         resourceManager.placeResource();
 
-        //TODO : question for el is mapStream = mapReader.read(map) than new MapReader(map) better ?
         MapReader mapReader = new MapReader();
         Stream<String> mapStream = mapReader.read(map);
         MapWriter mapWriter = new MapWriter();
