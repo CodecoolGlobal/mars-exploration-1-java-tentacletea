@@ -31,7 +31,7 @@ public class Application {
         ConfigValidator configValidator = new ConfigValidator(mapConfig);
         System.out.println("mapConfig is valid = " + configValidator.validate(25));
 
-        MapGenerator mapGenerator = new MapGenerator(mapConfig);
-        mapGenerator.generate();
+       // MapGenerator mapGenerator = new MapGenerator(mapConfig);
+       // mapGenerator.generate();
     }
 }
