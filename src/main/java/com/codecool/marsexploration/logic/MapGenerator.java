@@ -2,11 +2,10 @@ package com.codecool.marsexploration.logic;
 
 import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.MapConfig;
-import com.codecool.marsexploration.ui.PrintMap;
+import com.codecool.marsexploration.io.PrintMap;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class MapGenerator {
     private final MapConfig mapConfig;
