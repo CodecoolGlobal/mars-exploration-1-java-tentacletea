@@ -10,13 +10,14 @@ import com.codecool.marsexploration.logic.MapGenerator;
 import com.codecool.marsexploration.logic.resource.Resource;
 import com.codecool.marsexploration.io.MapWriter;
 import com.codecool.marsexploration.io.PrintMap;
+import com.codecool.marsexploration.logic.resource.Water;
 
 import java.util.*;
 import java.util.stream.Stream;
 
 public class Application {
     public static void main(String[] args) {
-        String outputPath = "src/main/resources/exploration-dummy.map";
+        String outputPath = "src/main/resources/Terra-formers.map";
         Random random = new Random();
 
         int mapWidth = 20;
@@ -51,8 +52,8 @@ public class Application {
         resources.add(minerals1);
         Water water1 = new Water();
         resources.add(water1);
-        ResourceManager resourcementManager = new ResourceManager(addedPitsToMountainMap, mapConfig, resources);
-        resourcementManager.placeResource();
+        ResourceManager resourceManager = new ResourceManager(addedPitsToMountainMap, mapConfig, resources);
+        resourceManager.placeResource();
 
 
 //        printMap.run(addedPitsToMountainMap);
