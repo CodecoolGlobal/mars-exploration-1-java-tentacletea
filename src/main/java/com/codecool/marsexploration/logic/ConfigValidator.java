@@ -34,7 +34,6 @@ public class ConfigValidator {
                 .mapToInt(Integer::intValue)
                 .sum();
         int occupiedCells = mountainSymbols + pitSymbols + water + minerals;
-
         return occupiedCells;
     }
 

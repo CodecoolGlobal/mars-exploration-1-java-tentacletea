@@ -22,13 +22,3 @@ public class MapWriter {
         }
     }
 }
-
-//            this looks better lol
-
-//            for (List<String> row : addedMountainMap) {
-//                for (String value : row) {
-//                    writer.write(value);
-//                }
-//                writer.write("\n");
-//            }
-//            writer.close();

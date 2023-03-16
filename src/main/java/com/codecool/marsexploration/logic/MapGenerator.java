@@ -33,10 +33,9 @@ public class MapGenerator {
         addShapesToMap(stringMap,mountainAreas,"▲");
         addShapesToMap(stringMap,pitAreas,"#");
 
-        PrintMap printMap = new PrintMap();
         return stringMap;
     }
-    public List<List<Coordinate>> getShapesForOneResource(List<Coordinate> shapes){
+public List<List<Coordinate>> getShapesForOneResource(List<Coordinate> shapes){
         AreaGenerator areaGenerator = new AreaGenerator();
 
 
