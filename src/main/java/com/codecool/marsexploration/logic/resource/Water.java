@@ -7,7 +7,7 @@ public class Water implements Resource{
     }
 
     @Override
-    public String getResourceTerrain() {
+    public String getTerrainForResource() {
         return "#";
     }
 }

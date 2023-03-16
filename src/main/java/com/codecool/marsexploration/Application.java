@@ -7,6 +7,7 @@ import com.codecool.marsexploration.logic.ShapeGenerator;
 import com.codecool.marsexploration.logic.ConfigValidator;
 import com.codecool.marsexploration.logic.MapGenerator;
 import com.codecool.marsexploration.logic.resource.Resource;
+import com.codecool.marsexploration.logic.resource.Water;
 import com.codecool.marsexploration.ui.PrintMap;
 
 import java.util.*;
@@ -42,9 +43,12 @@ public class Application {
         List<List<String>> addedPitsToMountainMap = shapegenerator.addShapesToMap(addedMountainMap,shapegenerator.getDummyPitShapes(),"#");
 
 
+
         Set<Resource> resources = new HashSet<>();
         Minerals minerals1 = new Minerals();
         resources.add(minerals1);
+        Water water1 = new Water();
+        resources.add(water1);
         ResourceManager resourcementManager = new ResourceManager(addedPitsToMountainMap, mapConfig, resources);
         resourcementManager.placeResource();
 
