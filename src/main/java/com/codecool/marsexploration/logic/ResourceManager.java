@@ -2,7 +2,7 @@ package com.codecool.marsexploration.logic;
 
 import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.MapConfig;
-import com.codecool.marsexploration.logic.resource.Resource;
+import com.codecool.marsexploration.data.resource.Resource;
 
 import java.util.List;
 import java.util.Random;
@@ -23,18 +23,18 @@ public class ResourceManager {
     public boolean isAdjacentToPreferredTerrain(Coordinate coordinate, String terrain){
         int y = coordinate.y();
         int x = coordinate.x();
+        boolean checkNorth = y > 0 && terrainMap.get(y - 1).get(x).equals(terrain);
+        boolean checkSouth = y < terrainMap.size() - 1 && terrainMap.get(y + 1).get(x).equals(terrain);
+        boolean checkWest = x > 0 && terrainMap.get(y).get(x - 1).equals(terrain);
+        boolean checkEast = x < terrainMap.get(y).size() - 1 && terrainMap.get(y).get(x + 1).equals(terrain);
 
-        if (y > 0 && terrainMap.get(y - 1).get(x).equals(terrain)) { // Check North
+        if (checkNorth) {
             return true;
-        } else if (y < terrainMap.size() - 1 && terrainMap.get(y + 1).get(x).equals(terrain)) { // Check South
+        } else if (checkSouth) {
             return true;
-        } else if (x > 0 && terrainMap.get(y).get(x - 1).equals(terrain)) { // Check West
+        } else if (checkWest) {
             return true;
-        } else if (x < terrainMap.get(y).size() - 1 && terrainMap.get(y).get(x + 1).equals(terrain)) { // Check East
-            return true;
-        } else {
-            return false;
-        }
+        } else return checkEast;
     }
 
 
