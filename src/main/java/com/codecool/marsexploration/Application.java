@@ -1,6 +1,7 @@
 package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.data.MapConfig;
+import com.codecool.marsexploration.data.MapSize;
 import com.codecool.marsexploration.logic.AreaGenerator;
 import com.codecool.marsexploration.io.MapReader;
 import com.codecool.marsexploration.logic.ResourceManager;
@@ -21,7 +22,7 @@ public class Application {
         String outputPath = "src/main/resources/Terra-formers.map";
         Random random = new Random();
 
-        int mapWidth = 25;
+        int mapWidth = MapSize.SMALL.getSize();
         
         List<Integer> mountains = new ArrayList<>();
         List<Integer> pits = new ArrayList<>();
