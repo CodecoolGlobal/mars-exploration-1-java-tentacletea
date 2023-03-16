@@ -10,12 +10,12 @@ import java.util.Set;
 
 public class ResourceManager {
 
-    private List<List<String>> mapWithTerreins;
-    private MapConfig mapConfig;
-    private Set<Resource> resources;
+    private final List<List<String>> terrainMap;
+    private final MapConfig mapConfig;
+    private final Set<Resource> resources;
 
-    public ResourceManager(List<List<String>> mapWithTerreins, MapConfig mapConfig, Set<Resource> resources) {
-        this.mapWithTerreins = mapWithTerreins;
+    public ResourceManager(List<List<String>> terrainMap, MapConfig mapConfig, Set<Resource> resources) {
+        this.terrainMap = terrainMap;
         this.mapConfig = mapConfig;
         this.resources = resources;
     }
@@ -24,13 +24,13 @@ public class ResourceManager {
         int y = coordinate.y();
         int x = coordinate.x();
 
-        if (y > 0 && mapWithTerreins.get(y - 1).get(x).equals(terrain)) { // Check North
+        if (y > 0 && terrainMap.get(y - 1).get(x).equals(terrain)) { // Check North
             return true;
-        } else if (y < mapWithTerreins.size() - 1 && mapWithTerreins.get(y + 1).get(x).equals(terrain)) { // Check South
+        } else if (y < terrainMap.size() - 1 && terrainMap.get(y + 1).get(x).equals(terrain)) { // Check South
             return true;
-        } else if (x > 0 && mapWithTerreins.get(y).get(x - 1).equals(terrain)) { // Check West
+        } else if (x > 0 && terrainMap.get(y).get(x - 1).equals(terrain)) { // Check West
             return true;
-        } else if (x < mapWithTerreins.get(y).size() - 1 && mapWithTerreins.get(y).get(x + 1).equals(terrain)) { // Check East
+        } else if (x < terrainMap.get(y).size() - 1 && terrainMap.get(y).get(x + 1).equals(terrain)) { // Check East
             return true;
         } else {
             return false;
@@ -40,13 +40,13 @@ public class ResourceManager {
 
 
     public void placeResource(){
-        resources.stream()
+        resources
                 .forEach(resource -> {
                     int count = resource.getResource().equals("*") ? mapConfig.minerals() : mapConfig.water();
                     while (count > 0){
                         Coordinate coordinate = getRandomCoordinatesForResource();
                         if (isAdjacentToPreferredTerrain(coordinate, resource.getTerrainForResource())){
-                            mapWithTerreins.get(coordinate.y()).set(coordinate.x(), resource.getResource());
+                            terrainMap.get(coordinate.y()).set(coordinate.x(), resource.getResource());
                             count--;
                         }
                     }
@@ -74,10 +74,7 @@ public class ResourceManager {
 
 
     public boolean validateIfSpaceIsEmpty(int x, int y){
-        if (mapWithTerreins.get(y).get(x).equals(" ")){
-            return true;
-        }
-        return false;
+        return terrainMap.get(y).get(x).equals(" ");
     }
 
 
