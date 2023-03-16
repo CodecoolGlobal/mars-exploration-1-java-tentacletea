@@ -28,13 +28,7 @@ public class ResourceManager {
         boolean checkWest = x > 0 && terrainMap.get(y).get(x - 1).equals(terrain);
         boolean checkEast = x < terrainMap.get(y).size() - 1 && terrainMap.get(y).get(x + 1).equals(terrain);
 
-        if (checkNorth) {
-            return true;
-        } else if (checkSouth) {
-            return true;
-        } else if (checkWest) {
-            return true;
-        } else return checkEast;
+        return checkNorth || checkSouth || checkWest || checkEast;
     }
 
 
