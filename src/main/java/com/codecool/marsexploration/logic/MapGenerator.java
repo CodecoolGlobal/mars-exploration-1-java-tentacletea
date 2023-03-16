@@ -21,16 +21,18 @@ public class MapGenerator {
 
     public void generate() {
 
-        List<List<Coordinate>> allAreas = new ArrayList<>();
-        allAreas.add(shapeGenerator.getOneShapeSecondVersion(30,areaGenerator.getAreasForSmallMap().get(0)));
-        allAreas.add(shapeGenerator.getOneShapeSecondVersion(20,areaGenerator.getAreasForSmallMap().get(1)));
-        allAreas.add(shapeGenerator.getOneShapeSecondVersion(10,areaGenerator.getAreasForSmallMap().get(2)));
-        allAreas.add(shapeGenerator.getOneShapeSecondVersion(5,areaGenerator.getAreasForSmallMap().get(3)));
-        allAreas.add(shapeGenerator.getOneShapeSecondVersion(15,areaGenerator.getAreasForSmallMap().get(4)));
+        List<List<Coordinate>> mountainAreas = new ArrayList<>();
+        List<List<Coordinate>> pitAreas = new ArrayList<>();
+        mountainAreas.add(shapeGenerator.getOneShapeSecondVersion(30,areaGenerator.getAreasForSmallMap().get(0)));
+        mountainAreas.add(shapeGenerator.getOneShapeSecondVersion(20,areaGenerator.getAreasForSmallMap().get(1)));
+        mountainAreas.add(shapeGenerator.getOneShapeSecondVersion(10,areaGenerator.getAreasForSmallMap().get(2)));
+        pitAreas.add(shapeGenerator.getOneShapeSecondVersion(5,areaGenerator.getAreasForSmallMap().get(3)));
+        pitAreas.add(shapeGenerator.getOneShapeSecondVersion(15,areaGenerator.getAreasForSmallMap().get(4)));
 
 
         List<List<String>> stringMap = getEmptyMap();
-        addShapesToMap(stringMap,allAreas,"*");
+        addShapesToMap(stringMap,mountainAreas,"▲");
+        addShapesToMap(stringMap,pitAreas,"#");
 
         PrintMap printMap = new PrintMap();
         printMap.run(stringMap);
