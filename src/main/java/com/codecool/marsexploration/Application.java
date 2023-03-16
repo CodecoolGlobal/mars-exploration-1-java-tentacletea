@@ -1,6 +1,7 @@
 package com.codecool.marsexploration;
-
 import com.codecool.marsexploration.data.MapConfig;
+import com.codecool.marsexploration.data.MapSize;
+import com.codecool.marsexploration.logic.AreaGenerator;
 import com.codecool.marsexploration.io.MapReader;
 import com.codecool.marsexploration.logic.ResourceManager;
 import com.codecool.marsexploration.logic.resource.Minerals;
@@ -20,7 +21,7 @@ public class Application {
         String outputPath = "src/main/resources/Terra-formers.map";
         Random random = new Random();
 
-        int mapWidth = 20;
+        int mapWidth = 25;
         
         List<Integer> mountains = new ArrayList<>();
         List<Integer> pits = new ArrayList<>();
@@ -30,7 +31,7 @@ public class Application {
         pits.add(5);
         pits.add(15);
 
-        int water = 2;
+        int water = 5;
         int minerals = 5;
 
         MapConfig mapConfig = new MapConfig(outputPath, mapWidth, mountains, pits, water, minerals);
@@ -39,12 +40,9 @@ public class Application {
         System.out.println("mapConfig is valid = " + configValidator.validate(25));
 
 
-        ShapeGenerator shapegenerator = new ShapeGenerator(mapConfig.mapWidth());
-
-        PrintMap printMap = new PrintMap();
-        List<List<String>> addedMountainMap=   shapegenerator.addShapesToMap(shapegenerator.getEmptyMap(),shapegenerator.getDummyMountainShapes(),"^");
-        List<List<String>> addedPitsToMountainMap = shapegenerator.addShapesToMap(addedMountainMap,shapegenerator.getDummyPitShapes(),"#");
-
+        ShapeGenerator shapeGenerator = new ShapeGenerator(random);
+        AreaGenerator areaGenerator = new AreaGenerator();
+        MapGenerator mapGenerator = new MapGenerator(mapConfig,areaGenerator,shapeGenerator);
 
 
         Set<Resource> resources = new HashSet<>();
@@ -55,7 +53,6 @@ public class Application {
         ResourceManager resourceManager = new ResourceManager(addedPitsToMountainMap, mapConfig, resources);
         resourceManager.placeResource();
 
-
 //        printMap.run(addedPitsToMountainMap);
 
         //TODO : question for el is mapStream = mapReader.read(addedMountainMap) better ?
@@ -64,7 +61,7 @@ public class Application {
         MapWriter mapWriter = new MapWriter();
         mapWriter.write(mapStream, outputPath);
 
-        MapGenerator mapGenerator = new MapGenerator(mapConfig);
+
         mapGenerator.generate();
     }
 }

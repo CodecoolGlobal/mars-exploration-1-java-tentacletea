@@ -1,44 +1,42 @@
 package com.codecool.marsexploration.logic;
 
+import com.codecool.marsexploration.data.Area;
 import com.codecool.marsexploration.data.Coordinate;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ShapeGenerator {
 
-private int mapWidth;
-
-    public ShapeGenerator(int mapWidth) {
-        this.mapWidth = mapWidth;
+private Random random;
+    public ShapeGenerator(Random random) {
+        this.random = random;
     }
 
 
-    public List<List<String>> getEmptyMap(){
-        List<List<String>> emptyMap = new ArrayList<>();
-        for(int i = 0;i< mapWidth;i++){
-            emptyMap.add(new ArrayList<>());
-            for(int j= 0; j< mapWidth;j++){
-               emptyMap.get(i).add(" ");
+    
+    public  List<Coordinate> getOneShapeSecondVersion( int shapeLength, Area area){
+        Map<String,Coordinate > shapeList = new HashMap<>();
+        int x = random.nextInt(area.xMin(), area.xMax()+1);
+        int y = random.nextInt(area.yMin(), area.yMax()+1);
+        Coordinate startingPoint  = new Coordinate(x,y);
+        String keyOfStartingPoint =(x+ "" +y);
+        shapeList.put(keyOfStartingPoint,startingPoint);
+        while(shapeList.size()< shapeLength){
+            x = random.nextInt(x-1,x+2);
+            y= random.nextInt(y-1,y+2);
+            if(x< area.xMin() || x >= area.xMax()|| y < area.yMin() || y >= area.yMax()) {
+                x = shapeList.get(keyOfStartingPoint).x();
+                y = shapeList.get(keyOfStartingPoint).y();
+                continue;
             }
+            shapeList.put(x+""+y,new Coordinate(x,y));
         }
-        return emptyMap;
+        return new ArrayList<>(shapeList.values());
     }
 
- public List<List<String>> addShapesToMap(List<List<String>> map,List<List<Coordinate>> shapes,String sign){
-         int x ;
-         int y;
 
-        for(int i=0;i <shapes.size();i++ ){
-            for(int j= 0; j< shapes.get(i).size();j++){
-                x = shapes.get(i).get(j).x();
-                y = shapes.get(i).get(j).y();
-                map.get(x).set(y,sign);
-            }
-        }
 
-        return map;
- }public List<List<Coordinate>> getDummyMountainShapes(){
+    public List<List<Coordinate>> getDummyMountainShapes(){
         List<List<Coordinate>> mountainShapes = new ArrayList<>();
         List<Coordinate> mountainShape1 = new ArrayList<>();
         List<Coordinate> mountainShape2 = new ArrayList<>();
@@ -119,8 +117,6 @@ private int mapWidth;
 
         return mountainShapes;
     }
-
-
     public List<List<Coordinate>> getDummyPitShapes(){
         List<List<Coordinate>> pitShapes = new ArrayList<>();
         List<Coordinate> pitShape1 = new ArrayList<>();
