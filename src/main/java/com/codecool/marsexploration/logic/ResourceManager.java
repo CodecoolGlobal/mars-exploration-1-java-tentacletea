@@ -13,11 +13,13 @@ public class ResourceManager {
     private final List<List<String>> terrainMap;
     private final MapConfig mapConfig;
     private final Set<Resource> resources;
+    private final Random random;
 
-    public ResourceManager(List<List<String>> terrainMap, MapConfig mapConfig, Set<Resource> resources) {
+    public ResourceManager(List<List<String>> terrainMap, MapConfig mapConfig, Set<Resource> resources, Random random) {
         this.terrainMap = terrainMap;
         this.mapConfig = mapConfig;
         this.resources = resources;
+        this.random = random;
     }
 
     public boolean isAdjacentToPreferredTerrain(Coordinate coordinate, String terrain){
@@ -53,14 +55,13 @@ public class ResourceManager {
     }
 
     public Coordinate getRandomCoordinatesForResource(){
-        int min = 0;
         int max = mapConfig.mapWidth() -1;
         boolean isEmpty = false;
         int x = 0;
         int y = 0;
         while (!isEmpty) {
-            x = randomNumberGenerator(min, max);
-            y = randomNumberGenerator(min, max);
+            x = random.nextInt(max + 1);
+            y = random.nextInt(max + 1);
             isEmpty = validateIfSpaceIsEmpty(x, y);
         }
         return new Coordinate(x, y);

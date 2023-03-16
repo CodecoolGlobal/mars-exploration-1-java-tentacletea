@@ -36,7 +36,7 @@ public class Application {
             resources.add(minerals);
             Water water = new Water();
             resources.add(water);
-            ResourceManager resourceManager = new ResourceManager(map, mapConfig, resources);
+            ResourceManager resourceManager = new ResourceManager(map, mapConfig, resources, random);
             resourceManager.placeResource();
 
             MapReader mapReader = new MapReader();
