@@ -17,7 +17,13 @@ private Random random;
         int x = random.nextInt(area.yMin(), area.yMax()+1);
         int y = random.nextInt(area.xMin(), area.xMax()+1);
         String keyOfStartingPoint = setStartingPoint(uniqueCoordinatesOfShape, y, x);
-        setUniqueCoordinatesForOneShape(shapeLength, area, uniqueCoordinatesOfShape, x, y, keyOfStartingPoint);
+        setUniqueCoordinatesForOneShape(
+                shapeLength,
+                area,
+                uniqueCoordinatesOfShape,
+                x,
+                y,
+                keyOfStartingPoint);
         return new ArrayList<>(uniqueCoordinatesOfShape.values());
     }
     private static String setStartingPoint(Map<String, Coordinate> shapeCoordinate, int x, int y) {
