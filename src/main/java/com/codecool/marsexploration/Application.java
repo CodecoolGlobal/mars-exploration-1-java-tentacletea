@@ -1,20 +1,19 @@
 package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.data.MapConfig;
-import com.codecool.marsexploration.io.InitConfig;
-import com.codecool.marsexploration.logic.AreaGenerator;
-import com.codecool.marsexploration.io.MapReader;
-import com.codecool.marsexploration.logic.ResourceManager;
 import com.codecool.marsexploration.data.resource.Minerals;
-import com.codecool.marsexploration.logic.ShapeGenerator;
-import com.codecool.marsexploration.logic.ConfigValidator;
-import com.codecool.marsexploration.logic.MapGenerator;
 import com.codecool.marsexploration.data.resource.Resource;
+import com.codecool.marsexploration.data.resource.Water;
+import com.codecool.marsexploration.io.InitConfig;
+import com.codecool.marsexploration.io.MapReader;
 import com.codecool.marsexploration.io.MapWriter;
 import com.codecool.marsexploration.io.PrintMap;
-import com.codecool.marsexploration.data.resource.Water;
+import com.codecool.marsexploration.logic.*;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import java.util.stream.Stream;
 
 public class Application {
