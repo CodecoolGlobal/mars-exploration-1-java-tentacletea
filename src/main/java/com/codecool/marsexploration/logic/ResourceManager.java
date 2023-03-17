@@ -49,10 +49,6 @@ public class ResourceManager {
                 });
     }
 
-    private int randomNumberGenerator(int min, int max){
-        Random rand = new Random();
-        return rand.nextInt(max - min + 1);
-    }
 
     public Coordinate getRandomCoordinatesForResource(){
         int max = mapConfig.mapWidth() -1;

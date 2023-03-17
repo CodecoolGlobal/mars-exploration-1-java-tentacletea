@@ -1,6 +1,8 @@
 package com.codecool.marsexploration.io;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PrintMap {
     public  final String ANSI_BLACK = "\u001B[30m";
@@ -14,9 +16,18 @@ public class PrintMap {
     public void run(List<List<String>> map){
 
         int mapWidth = map.size();
+
+        Map colorMapping = new HashMap();
+        colorMapping.put("#", ANSI_RED);
+        colorMapping.put("▲", ANSI_CYAN);
+        colorMapping.put("*", ANSI_YELLOW);
+        colorMapping.put("~", ANSI_BLUE);
+
         for(int i = 0;i< mapWidth;i++){
             for(int j= 0; j< mapWidth;j++){
-                if(map.get(i).get(j).equals("#")){
+                String symbol = map.get(i).get(j);
+                System.out.print(colorMapping.get(symbol) + symbol);
+                /*if(map.get(i).get(j).equals("#")){
                     System.out.print(ANSI_RED + map.get(i).get(j));
                 }
                 else if(map.get(i).get(j).equals("▲")){
@@ -30,7 +41,7 @@ public class PrintMap {
                 }
                 else {
                     System.out.print(ANSI_WHITE + map.get(i).get(j));
-                }
+                }*/
             }
             System.out.println();
         }

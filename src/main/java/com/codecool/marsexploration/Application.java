@@ -22,6 +22,7 @@ public class Application {
         InitConfig initConfig = new InitConfig();
         MapConfig mapConfig = initConfig.init(outputPath);
         ConfigValidator configValidator = new ConfigValidator(mapConfig);
+        //TODO: make init function
         if(configValidator.validate(25)){
             System.out.println("MapConfig is valid");
             Random random = new Random();

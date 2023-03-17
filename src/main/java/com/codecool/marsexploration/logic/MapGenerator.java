@@ -2,6 +2,8 @@ package com.codecool.marsexploration.logic;
 
 import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.MapConfig;
+import com.codecool.marsexploration.data.resource.Minerals;
+import com.codecool.marsexploration.data.resource.Water;
 
 import java.util.*;
 
@@ -16,21 +18,34 @@ public class MapGenerator {
         this.mapConfig = mapConfig;
     }
 
+    private int getRandomNumber(int min, int max) {
+        return new Random().nextInt(min, max);
+    }
+
     public List<List<String>> generateMapWithTerrain() {
         List<List<Coordinate>> mountainAreas = new ArrayList<>();
         List<List<Coordinate>> pitAreas = new ArrayList<>();
         int[] indexesOfArea = new int[]{5, 10, 15, 20, 30};
         Collections.shuffle(Collections.singletonList(indexesOfArea));
 
-        mountainAreas.add(shapeGenerator.getOneShape(indexesOfArea[0], areaGenerator.getAreasForSmallMap().get(0)));
-        pitAreas.add(shapeGenerator.getOneShape(indexesOfArea[1], areaGenerator.getAreasForSmallMap().get(1)));
-        mountainAreas.add(shapeGenerator.getOneShape(indexesOfArea[2], areaGenerator.getAreasForSmallMap().get(2)));
-        pitAreas.add(shapeGenerator.getOneShape(indexesOfArea[3], areaGenerator.getAreasForSmallMap().get(3)));
-        mountainAreas.add(shapeGenerator.getOneShape(indexesOfArea[0], areaGenerator.getAreasForSmallMap().get(4)));
+        List<List<List<Coordinate>>> maps = new ArrayList<>();
+
+        maps.add(mountainAreas);
+        maps.add(pitAreas);
+
+        for(int i=0; i<areaGenerator.getAreasForSmallMap().size(); i++) {
+            maps.get(getRandomNumber(1,2)).add(shapeGenerator.getOneShape(indexesOfArea[i], areaGenerator.getAreasForSmallMap().get(i)));
+        }
+
+//        mountainAreas.add(shapeGenerator.getOneShape(indexesOfArea[0], areaGenerator.getAreasForSmallMap().get(0)));
+//        pitAreas.add(shapeGenerator.getOneShape(indexesOfArea[1], areaGenerator.getAreasForSmallMap().get(1)));
+//        mountainAreas.add(shapeGenerator.getOneShape(indexesOfArea[2], areaGenerator.getAreasForSmallMap().get(2)));
+//        pitAreas.add(shapeGenerator.getOneShape(indexesOfArea[3], areaGenerator.getAreasForSmallMap().get(3)));
+//        mountainAreas.add(shapeGenerator.getOneShape(indexesOfArea[0], areaGenerator.getAreasForSmallMap().get(4)));
 
         List<List<String>> stringMap = getEmptyMap();
-        addShapesToMap(stringMap, mountainAreas, "▲");
-        addShapesToMap(stringMap, pitAreas, "#");
+        addShapesToMap(stringMap, mountainAreas, new Minerals().getTerrainForResource());
+        addShapesToMap(stringMap, pitAreas, new Water().getTerrainForResource());
         return stringMap;
     }
     public List<List<String>> getEmptyMap(){
